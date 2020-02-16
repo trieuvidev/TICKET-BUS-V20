@@ -1,0 +1,45 @@
+{
+  "name": "ticket-bus-v20",
+  "version": "1.0.0",
+  "description": "ticket bus v20 app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "debug": "nodemon server.js",
+    "debug:log": "DEBUG=* nodemon server.js",
+    "start:local": "export NODE_ENV=local && node server.js",
+    "start:staging": "export NODE_ENV=staging && node server.js",
+    "start:window": "set NODE_ENV=local& node server.js",
+    "debug:log-win": "set DEBUG=* & nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bestkakarot1996/TICKET-BUS-V20.git"
+  },
+  "author": "TrieuViDev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bestkakarot1996/TICKET-BUS-V20/issues"
+  },
+  "homepage": "https://github.com/bestkakarot1996/TICKET-BUS-V20#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "bluebird": "^3.7.2",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.4.0",
+    "fs-extra": "^8.1.0",
+    "hogan.js": "^3.0.2",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
+    "mongoose": "^5.9.1",
+    "nodemailer": "^6.4.2",
+    "nodemon": "^2.0.2",
+    "passport": "^0.4.1",
+    "passport-facebook-token": "^3.3.0",
+    "passport-jwt": "^4.0.0",
+    "uuid": "^3.4.0",
+    "validator": "^12.2.0",
+    "yarn": "^1.22.0"
+  }
+}
