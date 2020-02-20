@@ -1,0 +1,56 @@
+.top__bar__logo { 
+    float: left;
+}
+.header { 
+    position: fixed;
+    z-index: 9999;
+    right: 0;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 0 0.4rem rgba(0,0,0,.1), 0 0.4rem 0.8rem rgba(0,0,0,.2);
+}
+.navbar .nav-item{ 
+    list-style: none;
+}
+.header__center { 
+    align-items: center;
+}
+.header__top { 
+    padding: 20px 0px;
+}
+.login__signup { 
+    display: flex;
+    justify-content: flex-end;
+}
+.login button, .signup button { 
+    background-color: transparent;
+    border: 1px solid #666;
+    width: 100px;
+    height: 35px;
+    font-weight: 700;
+    outline: none;
+    font-size: .8rem;
+    cursor: pointer;
+    margin: 0px 5px;
+}
+.menu__top ul { 
+    margin-bottom: 0;
+}
+.home , .trips, .news, .check__ticket { 
+    font-size: 16px;
+    font-weight: 700;
+    color: #666;
+}
+.signup .btn__signup { 
+    color: #ffffff;
+    background: #2ba1f0;
+}
+
+.login .btn__login { 
+    color: #666;
+}
+.top__bar__logo:hover { 
+    cursor: pointer;
+}

@@ -1,0 +1,41 @@
+.login-form-button{
+  width: 100%;
+  background: #007BFF;
+  color: white;
+  height: 40px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.title__login{
+  color: #eb0f07;
+}
+.ant-checkbox-wrapper{
+  float: left;
+}
+.login-form-forgot{
+  float: right;
+  text-decoration: none;
+}
+.btn__login__google{
+  width: 100%;
+  background: #EA4335;
+  height: 40px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  margin: 8px 0;
+}
+.btn__login__facebook{
+  width: 100%;
+  background: #3B5998;
+  height: 40px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+}
+.btn__login__google:hover, .btn__login__facebook:hover{
+  color: black;
+}
