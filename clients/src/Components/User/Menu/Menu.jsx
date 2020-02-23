@@ -3,13 +3,12 @@ import { Link, NavLink } from "react-router-dom";
 import "./Menu.css";
 import Login from "../../User/Modal/Login";
 import {connect} from "react-redux";
-import * as actions from "../../../Redux/Actions/index";
+import * as actions from "../../../Redux/Actions/User";
 
 
 class Menu extends Component {
 
   render() {
-    const {showModalLogin} = this.props;
     return (
       <Fragment>
         <section className="header">
@@ -65,18 +64,4 @@ class Menu extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    showModalLogin : state.showModalLogin
-  }
-};
-
-const mapDispatchToProps = (dispatch, props) => { 
-  return {
-    onModalLogin: () => {
-      dispatch(actions.showFormLogin())
-    }
-  }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Menu);
+export default Menu;
