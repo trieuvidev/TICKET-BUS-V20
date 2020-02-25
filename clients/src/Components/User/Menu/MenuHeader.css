@@ -54,3 +54,33 @@
 .top__bar__logo:hover { 
     cursor: pointer;
 }
+.ant-dropdown-placement-bottomRight {
+    z-index: 9999 !important;
+}
+.btn__loginSuccess { 
+    width: 100% !important;
+}
+.login__success {
+    width: 100%;
+}
+
+.ant-modal-content {
+    width: 80%;
+    margin: 0 auto;
+}
+.ant-modal-title {
+    text-align: center;
+    color: #40A9FF !important;
+    font-size: 20px !important;
+    font-weight: bold !important;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.ant-input-affix-wrapper, .login-form-button {
+    height: 40px !important;
+}
+.login-form-forgot {
+    float: right;
+}
+.login-form-button { 
+    width: 100%;
+}

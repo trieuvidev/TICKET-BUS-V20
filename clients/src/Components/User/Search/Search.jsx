@@ -8,9 +8,9 @@ class Search extends Component {
           <div className="banner"></div>
           <div className="col-sm-12 col-md-12 col-lg-12 col-xl-12 title__banner">
             <h1 className="title__h1">DU LỊCH KHẮP NƠI CÙNG VEXERE</h1>
-            <span className="description">
+            {/* <span className="description">
               Website mua bán vé xe online nhanh nhất
-            </span>
+            </span> */}
           </div>
           <div className="col-sm-12 col-md-12 col-lg-12 col-xl-12 search__trips">
             <form action="">
