@@ -3,7 +3,7 @@ import * as Types from "../../constants/actionTypes";
 
 const initialState = {
   isAuthenticate: false,
-  account: {}
+  account: {},
 }
 
 /** ------------------Auth User---------------------------
@@ -17,7 +17,6 @@ const authReducer = (state = initialState, action) => {
        isAuthenticate: true,
        account: action.access_token
      }
- 
    default:
      break;
  }
