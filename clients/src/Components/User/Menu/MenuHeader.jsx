@@ -1,7 +1,20 @@
 import React, { Component, Fragment } from "react";
 import "./MenuHeader.css";
-import 'antd/dist/antd.css';
-import { Menu, Icon, Button, Dropdown, Modal, Form, Input, Checkbox } from "antd";
+import "antd/dist/antd.css";
+import {
+  Menu,
+  Icon,
+  Button,
+  Dropdown,
+  Modal,
+  Form,
+  Input,
+  Checkbox
+} from "antd";
+import { Link } from "react-router-dom";
+import Loader from "../Loader/Loader";
+import { connect } from "react-redux";
+import * as actions from "../../../Redux/Actions/User";
 const { SubMenu } = Menu;
 
 class MenuHeader extends Component {
@@ -10,37 +23,61 @@ class MenuHeader extends Component {
     this.state = {
       isShowNameBtn: "Đăng Nhập",
       visible: false,
-      confirmLoading: false
+      email: "",
+      password: ""
     };
   }
 
-  onModalLogin = () => { 
+  onModalLogin = () => {
     this.setState({
       visible: true
-    })
-  }
+    });
+  };
 
-  handleCancel = () => { 
+  handleCancel = () => {
     this.setState({
       visible: false
-    })
+    });
+  };
+
+  handleSubmitForm = async event => {
+    event.preventDefault();
+    const { email, password } = this.state;
+   await this.props
+      .loginUser({ email, password })
+      .then(result => {
+        console.log(result);
+      })
+      .catch(console.log);
+     await  this.handleCancel();
+  };
+
+  handleLogoutUser = () => { 
+    this.props.logoutUser()
   }
+
+  handleOnchange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  };
 
   render() {
     const menu = (
       <Menu>
         <Menu.Item>
-          <a>Thông Tin Cá Nhân</a>
+          <Link>Thông Tin Cá Nhân</Link>
         </Menu.Item>
         <Menu.Item>
-          <a>Đăng Xuất</a>
+          <Link onClick={this.handleLogoutUser}>Đăng Xuất</Link>
         </Menu.Item>
       </Menu>
     );
 
     const { infoAccountLogin } = this.props;
     const { isAuthenticate, account } = infoAccountLogin;
-    const  {visible , confirmLoading } = this.state;
+    console.log(isAuthenticate)
+    const { visible, email, password } = this.state;
     return (
       <Fragment>
         <section className="header">
@@ -109,42 +146,62 @@ class MenuHeader extends Component {
           </div>
           {/*-------------------- Modal Login User -----------------------*/}
           <Modal
-          title="ĐĂNG NHẬP"
-          visible={visible}
-          confirmLoading={confirmLoading}
-          onCancel={this.handleCancel}
-          onOpenModal={this.onOpenModal}
-          footer={null}
-        >
-          <Form className="login-form">
-            <Input
-              prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-              placeholder="Email"
-            />,
-            <Input
-              prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-              type="password"
-              placeholder="Mật khẩu"
-            />,
-        <Form.Item>
-          <Checkbox>Nhớ mật khẩu</Checkbox>
-          <a className="login-form-forgot" href="">
-            Quên mật khẩu
-          </a>
-          </Form.Item>
-          <Form.Item>
-          <Button type="primary" htmlType="submit" className="login-form-button">
-           Đăng Nhập
-          </Button>
-          </Form.Item>
-      </Form>
-        </Modal>
+            title="ĐĂNG NHẬP"
+            visible={visible}
+            onCancel={this.handleCancel}
+            onOpenModal={this.onOpenModal}
+            footer={null}
+          >
+            <Form onSubmit={this.handleSubmitForm} className="login-form">
+              <Input
+                prefix={
+                  <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
+                }
+                placeholder="Email"
+                name="email"
+                value={email}
+                onChange={this.handleOnchange}
+              />
+              ,
+              <Input
+                prefix={
+                  <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
+                }
+                type="password"
+                placeholder="Mật khẩu"
+                name="password"
+                value={password}
+                onChange={this.handleOnchange}
+              />
+              ,
+              <Form.Item>
+                <Checkbox>Nhớ mật khẩu</Checkbox>
+                <a className="login-form-forgot" href="">
+                  Quên mật khẩu
+                </a>
+              </Form.Item>
+              <Form.Item>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  className="login-form-button"
+                >
+                  Đăng Nhập
+                </Button>
+              </Form.Item>
+            </Form>
+          </Modal>
           {/* Modal Login User*/}
         </section>
       </Fragment>
-    );
-  }
+    );  }
 }
 
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    loginUser: credentials => dispatch(actions.loginUserApi(credentials)),
+    logoutUser : () => dispatch(actions.logoutUser())
+  };
+};
 
-export default MenuHeader;
+export default connect(null, mapDispatchToProps)(MenuHeader);
