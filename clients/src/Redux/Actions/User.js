@@ -10,12 +10,12 @@ export const loginUserApi = credentials => {
     return api
       .post("/account/login-user", credentials)
       .then(res => {
-        console.log(res);
         const access_token = res.data[0].token;
         const status = res.status;
         const decode = jwtDecoded(access_token);
         dispatch(setInfoCurrentUser(decode));
         localStorage.setItem("ACCESS_TOKEN", access_token);
+        return Promise.resolve({status, decode , message: `Đăng nhập ${decode.email} thành công!`})
       })
       .catch(() => {
         return Promise.reject({ message: "Đăng nhập thất bại!" });
@@ -23,11 +23,19 @@ export const loginUserApi = credentials => {
   };
 };
 
+
+export const logoutUser = () => { 
+  return dispatch => { 
+    localStorage.removeItem("ACCESS_TOKEN");
+    dispatch(setInfoCurrentUser({}))
+  }
+};
+
 export const setInfoCurrentUser = access_token => {
   return dispatch => {
     dispatch({
       type: Types.SET_INFO_CURRENT_USER,
-      access_token: access_token
+      access_token: access_token,
     });
   };
 };

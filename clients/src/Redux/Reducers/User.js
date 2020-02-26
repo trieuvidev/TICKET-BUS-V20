@@ -1,4 +1,5 @@
 import * as Types from "../../constants/actionTypes";
+import _ from "lodash";
 
 
 const initialState = {
@@ -14,7 +15,7 @@ const authReducer = (state = initialState, action) => {
    case Types.SET_INFO_CURRENT_USER:
      return { 
        ...state,
-       isAuthenticate: true,
+       isAuthenticate: !_.isEmpty(action.access_token),
        account: action.access_token
      }
  
