@@ -26,6 +26,14 @@ export const loginUserApi = credentials => {
   };
 };
 
+
+export const logoutUser = () => { 
+  return dispatch => { 
+    localStorage.removeItem("ACCESS_TOKEN");
+    dispatch(setInfoCurrentUser({}))
+  }
+};
+
 export const setInfoCurrentUser = access_token => {
   return dispatch => {
     dispatch({
