@@ -9,7 +9,8 @@ import {
   Modal,
   Form,
   Input,
-  Checkbox
+  Checkbox,
+  Avatar
 } from "antd";
 import { Link } from "react-router-dom";
 import Loader from "../Loader/Loader";
@@ -21,7 +22,7 @@ class MenuHeader extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isShowNameBtn: "Đăng Nhập",
+      isShowNameBtn: "Sign In",
       visible: false,
       email: "",
       password: ""
@@ -46,9 +47,8 @@ class MenuHeader extends Component {
    await this.props
       .loginUser({ email, password })
       .then(result => {
-        console.log(result);
       })
-      .catch(console.log);
+      .catch();
      await  this.handleCancel();
   };
 
@@ -66,10 +66,10 @@ class MenuHeader extends Component {
     const menu = (
       <Menu>
         <Menu.Item>
-          <Link>Thông Tin Cá Nhân</Link>
+          <Link>Profile</Link>
         </Menu.Item>
         <Menu.Item>
-          <Link onClick={this.handleLogoutUser}>Đăng Xuất</Link>
+          <Link onClick={this.handleLogoutUser}>Logout</Link>
         </Menu.Item>
       </Menu>
     );
@@ -81,10 +81,10 @@ class MenuHeader extends Component {
     return (
       <Fragment>
         <section className="header">
-          <div className="container warpper">
+          <div className="warpper">
             <div className="container-fluid header__top ">
               <div className="row header__center">
-                <div className="col-sm-3 col-md-3 col-lg-3 col-xl-3 header__left">
+                <div className="col-sm-2 col-md-2 col-lg-2 col-xl-2 header__left">
                   <div className="top__bar__logo">
                     <img
                       src={require("../../../dist/img/logo_vexere.svg")}
@@ -92,25 +92,25 @@ class MenuHeader extends Component {
                     />
                   </div>
                 </div>
-                <div className="col-sm-6 col-md-6 col-lg-6 col-xl-6 header__center">
+                <div className="col-sm-8 col-md-8 col-lg-8 col-xl-8 header__center">
                   <div className="menu__top">
                     <ul className="navbar">
                       <li className="nav-item">
-                        <a className="home">Trang Chủ</a>
+                        <a className="home">HOME</a>
                       </li>
                       <li className="nav-item">
-                        <a className="trips">Chuyến Đi</a>
+                        <a className="trips">TRIP</a>
                       </li>
                       <li className="nav-item">
-                        <a className="news">Tin Tức</a>
+                        <a className="news">NEW</a>
                       </li>
                       <li className="nav-item">
-                        <a className="check__ticket">Kiểm Tra Vé</a>
+                        <a className="check__ticket">CHECK TICKET</a>
                       </li>
                     </ul>
                   </div>
                 </div>
-                <div className="col-sm-3 col-md-3 col-lg-3 col-xl-3 header__right">
+                <div className="col-sm-2 col-md-2 col-lg-2 col-xl-2 header__right">
                   <div className="login__signup">
                     {!isAuthenticate ? (
                       <div className="login">
@@ -127,7 +127,8 @@ class MenuHeader extends Component {
                       <div className="login__success">
                         <Dropdown overlay={menu} placement="bottomRight">
                           <Button className="btn__loginSuccess">
-                            {account.fullName}
+                      <Avatar className="avatar" src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                            <span className="name__user">{account.fullName}</span>
                           </Button>
                         </Dropdown>
                       </div>
@@ -136,7 +137,7 @@ class MenuHeader extends Component {
                       ""
                     ) : (
                       <div className="signup">
-                        <button className="btn__signup">Đăng Ký</button>
+                        <button className="btn__signup">Sign Up</button>
                       </div>
                     )}
                   </div>
@@ -146,7 +147,7 @@ class MenuHeader extends Component {
           </div>
           {/*-------------------- Modal Login User -----------------------*/}
           <Modal
-            title="ĐĂNG NHẬP"
+            title="LOGIN"
             visible={visible}
             onCancel={this.handleCancel}
             onOpenModal={this.onOpenModal}
@@ -168,16 +169,16 @@ class MenuHeader extends Component {
                   <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
                 }
                 type="password"
-                placeholder="Mật khẩu"
+                placeholder="Password"
                 name="password"
                 value={password}
                 onChange={this.handleOnchange}
               />
               ,
               <Form.Item>
-                <Checkbox>Nhớ mật khẩu</Checkbox>
+                <Checkbox>Remember me</Checkbox>
                 <a className="login-form-forgot" href="">
-                  Quên mật khẩu
+                Forgot password
                 </a>
               </Form.Item>
               <Form.Item>
@@ -186,7 +187,7 @@ class MenuHeader extends Component {
                   htmlType="submit"
                   className="login-form-button"
                 >
-                  Đăng Nhập
+                  Submit
                 </Button>
               </Form.Item>
             </Form>

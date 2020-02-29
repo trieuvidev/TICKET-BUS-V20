@@ -42,7 +42,6 @@ const initPassportFacebook = () => {
         clientID: CLIENT_ID,
         clientSecret: CLIENT_CECRET,
     }, async (accessToken, refreshToken, profile, done) => {
-        console.log(profile, "profile")
         try {
             const account = await Account.findOne({ "facebook.uid": profile.id });
             if (account) {
