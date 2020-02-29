@@ -1,0 +1,11 @@
+.logo img {
+  width: 40px;
+  height: 40px;
+}
+.ant-menu-root {
+  margin-top: 20px !important;
+}
+.logo{
+  height: 22px !important;
+  margin: 18px !important;
+}

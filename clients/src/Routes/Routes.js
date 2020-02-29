@@ -1,18 +1,30 @@
 import React from "react";
 
-import HomePage from "../Pages/User/HomePage/HomePage";
-import NotFound from "../Pages/User/NotFound/NotFound";
+import HomeUser from "../Pages/Users/HomeUser/HomeUser";
+import NotFound from "../Pages/Users/NotFound/NotFound";
+import LoginFormAdmin from "../Components/Admin/LoginAdmin/LoginFormAdmin";
+import HomeAdmin from "../Pages/Admin/HomeAdmin/HomeAdmin";
 
-const router = [ 
+const router = [
   {
     path: "/",
     exact: true,
-    main: () => <HomePage /> 
+    main: () => <HomeUser />
+  },
+  {
+    path: "/administrator",
+    exact: true,
+    main: (history) => <LoginFormAdmin history={history} />
+  },
+  {
+    path: "/admin",
+    exact: true,
+    main: (history) => <HomeAdmin history={history}/>
   },
   {
     path: "*",
     exact: true,
     main: () => <NotFound />
   }
-]
+];
 export default router;

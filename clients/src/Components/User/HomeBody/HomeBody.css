@@ -1,0 +1,29 @@
+.home__body {
+  position: absolute;
+  width: 100%;
+  top: 90%;
+  left: 0;
+  right: 0;
+  background-color: #EFF5FA;
+  z-index: 3;
+}
+.about__us__item {
+  padding: 125px 30px;
+  background-color: #fff;
+}
+.content__about-us {
+  padding: 40px 0px;
+}
+.image__hot__deals img {
+  width: 285px;
+  height: 220px;
+  margin: 0;
+}
+
+.image__hot__deals {
+  width: 285px;
+  height: 220px;
+}
+.hot__deals{
+  padding: 37px 0px;
+}
