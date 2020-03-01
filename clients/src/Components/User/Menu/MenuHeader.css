@@ -1,0 +1,132 @@
+.top__bar__logo { 
+    float: left;
+}
+.warpper {
+    width: 95%;
+    margin: 0 auto;
+}
+.header { 
+    position: fixed;
+    z-index: 9999;
+    right: 0;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 0 0.4rem rgba(0,0,0,.1), 0 0.4rem 0.8rem rgba(0,0,0,.2);
+}
+.navbar .nav-item{ 
+    list-style: none;
+}
+.header__center { 
+    align-items: center;
+}
+.header__top { 
+    padding: 20px 0px;
+}
+.login__signup { 
+    display: flex;
+    justify-content: flex-end;
+}
+.login button, .signup button { 
+    background-color: transparent;
+    border: 1px solid #666;
+    width: 100px;
+    height: 35px;
+    font-weight: 700;
+    outline: none;
+    font-size: .8rem;
+    cursor: pointer;
+    margin: 0px 5px;
+}
+.menu__top ul { 
+    margin-bottom: 0;
+}
+.home , .trips, .news, .check__ticket { 
+    font-size: 16px;
+    font-weight: 700;
+    color: #666;
+    line-height: 35px;
+}
+
+.nav-item:hover a { 
+    background-color: #40A9FF !important;
+    color: #ffffff !important;
+    transition: 0.5s;
+}
+
+.nav-item:hover { 
+    background-color: #40A9FF !important;
+}
+
+
+.signup .btn__signup { 
+    color: #ffffff;
+    background: #2ba1f0;
+}
+
+.login .btn__login { 
+    color: #666;
+}
+.login .btn__login:hover {
+    background-color: #40A9FF !important;
+    color: #ffffff !important;
+    transition: all 0.5s;
+}
+.signup .btn__signup:hover { 
+    color: #000;
+    background: #ffffff;
+    transition: all 0.5s;
+}
+.top__bar__logo:hover { 
+    cursor: pointer;
+}
+.ant-dropdown-placement-bottomRight {
+    z-index: 9999 !important;
+}
+.btn__loginSuccess { 
+    width: 100% !important;
+    height: 40px !important;
+}
+.login__success {
+    width: 100%;
+}
+
+.ant-modal-content {
+    width: 80%;
+    margin: 0 auto;
+}
+.ant-modal-title {
+    text-align: center;
+    color: #40A9FF !important;
+    font-size: 20px !important;
+    font-weight: bold !important;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.ant-input-affix-wrapper, .login-form-button {
+    height: 40px !important;
+}
+.login-form-forgot {
+    float: right;
+}
+.login-form-button { 
+    width: 100%;
+}
+.navbar .nav-item {
+    width: 120px;
+    height: 35px;
+    font-weight: 700;
+    outline: none;
+    font-size: .8rem;
+    cursor: pointer;
+    margin: 0px 40px;
+    text-align: center;
+}
+.avatar {
+    float: left;
+    width: 30px;
+    height: 30px;
+}
+.name__user {
+    line-height: 30px;
+}

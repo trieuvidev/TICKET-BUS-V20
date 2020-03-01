@@ -5,11 +5,10 @@ body {
     sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: Roboto, Helvetica, Arial, sans-serif;
-  font-size: 14px;
+  font-family: PT Sans,sans-serif;
 }
 
 code {
-  font-family: Roboto, Helvetica, Arial, sans-serif;
-  font-size: 14px;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
 }

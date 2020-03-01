@@ -5,7 +5,7 @@ import NotFound from "../Pages/Users/NotFound/NotFound";
 import LoginFormAdmin from "../Components/Admin/LoginAdmin/LoginFormAdmin";
 import HomeAdmin from "../Pages/Admin/HomeAdmin/HomeAdmin";
 
-const routes = [
+const router = [
   {
     path: "/",
     exact: true,
@@ -21,10 +21,10 @@ const routes = [
     exact: true,
     main: (history) => <HomeAdmin history={history}/>
   },
-  // {
-  //   path: "*",
-  //   exact: true,
-  //   main: () => <NotFound />
-  // }
+  {
+    path: "*",
+    exact: true,
+    main: () => <NotFound />
+  }
 ];
-export default routes;
+export default router;

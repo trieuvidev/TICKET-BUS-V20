@@ -4,7 +4,7 @@ import _ from "lodash";
 
 const initialState = {
   isAuthenticate: false,
-  account: {}
+  account: {},
 }
 
 /** ------------------Auth User---------------------------
@@ -18,7 +18,6 @@ const authReducer = (state = initialState, action) => {
        isAuthenticate: !_.isEmpty(action.access_token),
        account: action.access_token
      }
- 
    default:
      break;
  }
