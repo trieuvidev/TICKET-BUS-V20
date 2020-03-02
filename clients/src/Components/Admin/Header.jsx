@@ -5,15 +5,15 @@ import {
   MenuFoldOutlined,
 } from "@ant-design/icons";
 import { connect } from "react-redux";
-import * as actions from "../../../Redux/Actions/Admin";
-import "../../../assets/css/stylePage.css";
+import * as actions from "../../Redux/Actions/Admin";
+import "../../assets/css/stylePage.css";
 const { Header } = Layout;
 
 class HeaderSidebar extends Component {
   constructor(props) {
     super(props);
   }
-
+  
   toggleOpenCollapsed = () => {
     this.props.showCollapsed();
   };
@@ -36,6 +36,8 @@ class HeaderSidebar extends Component {
     );
   }
 }
+
+
 
 
 const mapStateToProps = (state) => { 

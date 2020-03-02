@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import "./MenuHeader.css";
+import "../../assets/css/user.css";
 import "antd/dist/antd.css";
 import {
   Menu,
@@ -12,20 +12,19 @@ import {
   Checkbox,
   Avatar
 } from "antd";
-import { Link } from "react-router-dom";
-import Loader from "../Loader/Loader";
 import { connect } from "react-redux";
-import * as actions from "../../../Redux/Actions/User";
+import {Link} from "react-router-dom"
+import * as actions from "../../Redux/Actions/User";
+// import Loader from "../Loader";
 const { SubMenu } = Menu;
 
 class MenuHeader extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isShowNameBtn: "Sign In",
+      isShowNameBtn: "Đăng Nhập",
       visible: false,
-      email: "",
-      password: ""
+      isShowLoader: true
     };
   }
 
@@ -41,26 +40,35 @@ class MenuHeader extends Component {
     });
   };
 
-  handleSubmitForm = async event => {
+
+  handelSubmitForm = event => {
     event.preventDefault();
     const { email, password } = this.state;
-   await this.props
+    this.props
       .loginUser({ email, password })
-      .then(result => {
+      .then(res => {
+        console.log(res)
+        if(res.status === 200) {
+          setTimeout(() => {
+            this.setState({
+              visible: !this.state.visible
+            })
+          }, 1500);
+        }
       })
-      .catch();
-     await  this.handleCancel();
+      .catch(console.log);
   };
 
-  handleLogoutUser = () => { 
-    this.props.logoutUser()
-  }
-
-  handleOnchange = event => {
+  handelOnchage = event => {
     this.setState({
       [event.target.name]: event.target.value
     });
   };
+
+
+  handelLogoutUser = () => { 
+    this.props.logoutUser();
+  }
 
   render() {
     const menu = (
@@ -87,7 +95,7 @@ class MenuHeader extends Component {
                 <div className="col-sm-2 col-md-2 col-lg-2 col-xl-2 header__left">
                   <div className="top__bar__logo">
                     <img
-                      src={require("../../../dist/img/logo_vexere.svg")}
+                      src={require("../../dist/img/logo_vexere.svg")}
                       alt=""
                     />
                   </div>
@@ -202,7 +210,7 @@ const mapDispatchToProps = (dispatch, props) => {
   return {
     loginUser: credentials => dispatch(actions.loginUserApi(credentials)),
     logoutUser : () => dispatch(actions.logoutUser())
-  };
+  }
 };
 
 export default connect(null, mapDispatchToProps)(MenuHeader);

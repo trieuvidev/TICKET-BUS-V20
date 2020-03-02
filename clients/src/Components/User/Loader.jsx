@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import "./Loader.css";
+import "../../assets/css/user.css";
 
 class Loader extends Component {
   render() {

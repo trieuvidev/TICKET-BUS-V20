@@ -5,10 +5,10 @@ import {
   VideoCameraOutlined,
   UploadOutlined
 } from "@ant-design/icons";
-import "../../../assets/css/stylePage.css";
+import "../../assets/css/stylePage.css";
 import { connect } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
-import "../../../assets/css/stylePage.css";
+import "../../assets/css/stylePage.css";
 const { Sider } = Layout;
 
 class Sidebar extends Component {
@@ -21,24 +21,25 @@ class Sidebar extends Component {
           collapsed={this.props.collapse.isCollapsed}
         >
           <div className="logo">
-            <img src={require("../../../assets/img/logo-admin.svg")} alt="" />
+            <img src={require("../../assets/img/logo-admin.svg")} alt="" />
           </div>
           <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
             <Menu.Item key="1">
-              <Link className="menu__dashboard" to="/admin/dashboard">
-                Dashboards
-              </Link>
               <UserOutlined />
+              <span>Dashboards</span>
+              <Link className="menu__dashboard" to="/admin/dashboard">
+              </Link>
             </Menu.Item>
             <Menu.Item key="2">
-              <Link className="menu__users" to="/admin/users">
-                Users
-              </Link>
               <VideoCameraOutlined />
+              <span>Users</span>
+              <Link className="menu__users" to="/admin/users">
+              </Link>
             </Menu.Item>
             <Menu.Item key="3">
               <UploadOutlined />
-              <Link>Trips</Link>
+              <span>Trips</span>
+              <Link></Link>
             </Menu.Item>
           </Menu>
         </Sider>

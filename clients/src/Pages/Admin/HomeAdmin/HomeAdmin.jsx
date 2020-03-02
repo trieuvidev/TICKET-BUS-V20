@@ -3,12 +3,12 @@ import GuardAuthenticate from "../../../Guard/GuardAuthenticate";
 import jwtDecoded from "jwt-decode";
 import { connect } from "react-redux";
 import * as actions from "../../../Redux/Actions/User";
-import Loader from "../../../Components/User/Loader/Loader";
+import Loader from "../../../Components/User/Loader";
 import { Layout } from "antd";
 import "../../../assets/css/stylePage.css";
 
-import Header from "../../../Components/Admin/Header/Header";
-import Sidebar from "../../../Components/Admin/Sidebar/Sidebar";
+import Header from "../../../Components/Admin/Header";
+import Sidebar from "../../../Components/Admin/Sidebar";
 import { BrowserRouter, Switch, Route  } from "react-router-dom";
 import routes from "../../../routes/menuRoutes";
 const { Content } = Layout;
@@ -20,6 +20,7 @@ class HomeAdmin extends Component {
       isShowloader: true
     };
   }
+
 
   showContentRoutes = routes => {
     let result = null;
@@ -99,6 +100,7 @@ class HomeAdmin extends Component {
     );
   }
 }
+
 
 const mapDispatchToProps = (dispatch, props) => {
   return {

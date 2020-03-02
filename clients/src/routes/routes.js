@@ -2,7 +2,7 @@ import React from "react";
 
 import HomeUser from "../Pages/Users/HomeUser/HomeUser";
 import NotFound from "../Pages/Users/NotFound/NotFound";
-import LoginFormAdmin from "../Components/Admin/LoginAdmin/LoginFormAdmin";
+import LoginFormAdmin from "../Components/Admin/LoginFormAdmin";
 import HomeAdmin from "../Pages/Admin/HomeAdmin/HomeAdmin";
 
 const routes = [

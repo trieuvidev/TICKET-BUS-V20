@@ -1,7 +1,7 @@
 
 import React from "react";
-import Dashboard from "../Components/Admin/Dashboard/Dashboard";
-import ListUsers from "../Components/Admin/ListUsers/ListUsers";
+import Dashboard from "../Components/Admin/Dashboard";
+import ListUsers from "../Components/Admin/ListUsers";
 
 const menuRoutes = [
   {

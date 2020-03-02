@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import "./Search.css";
+import "../../assets/css/user.css";
 class Search extends Component {
   render() {
     return (

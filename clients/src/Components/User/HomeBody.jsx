@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import "./HomeBody.css";
+import "../../assets/css/user.css";
 
 class HomeBody extends Component {
   render() {
@@ -29,22 +29,22 @@ class HomeBody extends Component {
                   <div className="row">
                     <div className="col-sm-6 col-md-6 col-lg-6 col-xl-6">
                       <div className="image__hot__deals">
-                      <img src={require("../../../dist/img/banner-hot-deals.png")} alt=""/>
+                      <img src={require("../../dist/img/banner-hot-deals.png")} alt=""/>
                       </div>
                     </div>
                     <div className="col-sm-6 col-md-6 col-lg-6 col-xl-6">
                     <div className="image__hot__deals">
-                    <img src={require("../../../dist/img/banner-hot-deals.png")} alt=""/>
+                    <img src={require("../../dist/img/banner-hot-deals.png")} alt=""/>
                     </div>
                     </div>
                     <div className="col-sm-6 col-md-6 col-lg-6 col-xl-6">
                     <div className="image__hot__deals">
-                    <img src={require("../../../dist/img/banner-hot-deals.png")} alt=""/>
+                    <img src={require("../../dist/img/banner-hot-deals.png")} alt=""/>
                     </div>
                     </div>
                     <div className="col-sm-6 col-md-6 col-lg-6 col-xl-6">
                     <div className="image__hot__deals">
-                    <img src={require("../../../dist/img/banner-hot-deals.png")} alt=""/></div>
+                    <img src={require("../../dist/img/banner-hot-deals.png")} alt=""/></div>
                     </div>
                   </div>
                 </div>

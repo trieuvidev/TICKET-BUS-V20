@@ -1,0 +1,403 @@
+.banner__search { 
+  background: url("../../dist/img/banner.jpg") center center;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 500px;
+  position: relative;
+  top: 92px;
+  z-index: 3;
+}
+.banner {
+  width: 100%;
+  height: 500px;
+}
+.title__banner { 
+  position: absolute;
+  top: 20%;
+  z-index: 4;
+  color: #ffffff;
+}
+.title__banner .title__h1 { 
+  font-weight: 700;
+  font-size: 3rem;
+  color: #ffffff;
+  text-align: center;
+}
+.search__form, .search__to  { 
+    width: 275px;
+    height: 50px;
+    padding-left: 5%;
+    border: 1px solid #c4c4c4;
+    border-radius: 5px;
+}
+.btn__search { 
+  background-color: #F8AE00;
+    border: 1px solid #666;
+    width: 220px;
+    height: 50px;
+    font-weight: 700;
+    outline: none;
+    font-size: .8rem;
+    cursor: pointer;
+    margin: 0px 5px;
+    color: #666;
+    border-radius: 1px;
+    margin-right: 20px;
+}
+.search__trips { 
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  z-index: 3;
+}
+.from__trip, .to, .calendar { 
+  width: 280px;
+  height: 50px;
+  border-radius: 1px;
+}
+
+/* --------------HEADER------------------- duoi la header */ 
+
+.top__bar__logo { 
+  float: left;
+}
+.header { 
+  position: fixed;
+  z-index: 9999;
+  right: 0;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background-color: #ffffff;
+  box-shadow: 0 0 0.4rem rgba(0,0,0,.1), 0 0.4rem 0.8rem rgba(0,0,0,.2);
+}
+.navbar .nav-item{ 
+  list-style: none;
+}
+.header__center { 
+  align-items: center;
+}
+.header__top { 
+  padding: 20px 0px;
+}
+.login__signup { 
+  display: flex;
+  justify-content: flex-end;
+}
+.login button, .signup button { 
+  background-color: transparent;
+  border: 1px solid #666;
+  width: 100px;
+  height: 35px;
+  font-weight: 700;
+  outline: none;
+  font-size: .8rem;
+  cursor: pointer;
+  margin: 0px 5px;
+}
+.menu__top ul { 
+  margin-bottom: 0;
+}
+.home , .trips, .news, .check__ticket { 
+  font-size: 16px;
+  font-weight: 700;
+  color: #666;
+}
+.signup .btn__signup { 
+  color: #ffffff;
+  background: #2ba1f0;
+}
+
+.login .btn__login { 
+  color: #666;
+}
+.top__bar__logo:hover { 
+  cursor: pointer;
+}
+.ant-dropdown-placement-bottomRight {
+  z-index: 9999 !important;
+}
+.btn__loginSuccess { 
+  width: 100% !important;
+  height: 40px !important;
+  line-height: 40px !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: #40A9FF !important;
+}
+.btn__loginSuccess:hover { 
+  color: #666 !important; 
+}
+.ant-modal-footer {
+border: none !important;
+}
+.ant-modal-footer button:nth-child(1) {
+  display: none !important;
+}
+.ant-modal-footer button:nth-child(2) {
+  width: 100% !important;
+  height: 40px !important;
+  margin: 0 auto;
+}
+.login__success {
+  width: 100%;
+}
+
+.ant-modal-content {
+  width: 80%;
+  margin: 0 auto;
+}
+.ant-modal-title {
+  text-align: center;
+  color: #40A9FF !important;
+  font-size: 20px !important;
+  font-weight: bold !important;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.ant-input-affix-wrapper, .login-form-button {
+  height: 40px !important;
+}
+.login-form-forgot {
+  float: right;
+}
+.login-form-button { 
+  width: 100%;
+}
+.avatar__user {
+  float: left;
+  height: 40px;
+  width: 40px;
+}
+
+
+/* --------------MENU HEADER------------------- duoi la menu header */ 
+
+.top__bar__logo { 
+  float: left;
+}
+.warpper {
+  width: 95%;
+  margin: 0 auto;
+}
+.header { 
+  position: fixed;
+  z-index: 9999;
+  right: 0;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background-color: #ffffff;
+  box-shadow: 0 0 0.4rem rgba(0,0,0,.1), 0 0.4rem 0.8rem rgba(0,0,0,.2);
+}
+.navbar .nav-item{ 
+  list-style: none;
+}
+.header__center { 
+  align-items: center;
+}
+.header__top { 
+  padding: 20px 0px;
+}
+.login__signup { 
+  display: flex;
+  justify-content: flex-end;
+}
+.login button, .signup button { 
+  background-color: transparent;
+  border: 1px solid #666;
+  width: 100px;
+  height: 35px;
+  font-weight: 700;
+  outline: none;
+  font-size: .8rem;
+  cursor: pointer;
+  margin: 0px 5px;
+}
+.menu__top ul { 
+  margin-bottom: 0;
+}
+.home , .trips, .news, .check__ticket { 
+  font-size: 16px;
+  font-weight: 700;
+  color: #666;
+  line-height: 35px;
+}
+
+.nav-item:hover a { 
+  background-color: #40A9FF !important;
+  color: #ffffff !important;
+  transition: 0.5s;
+}
+
+.nav-item:hover { 
+  background-color: #40A9FF !important;
+}
+
+
+.signup .btn__signup { 
+  color: #ffffff;
+  background: #2ba1f0;
+}
+
+.login .btn__login { 
+  color: #666;
+}
+.login .btn__login:hover {
+  background-color: #40A9FF !important;
+  color: #ffffff !important;
+  transition: all 0.5s;
+}
+.signup .btn__signup:hover { 
+  color: #000;
+  background: #ffffff;
+  transition: all 0.5s;
+}
+.top__bar__logo:hover { 
+  cursor: pointer;
+}
+.ant-dropdown-placement-bottomRight {
+  z-index: 9999 !important;
+}
+.btn__loginSuccess { 
+  width: 100% !important;
+  height: 40px !important;
+}
+.login__success {
+  width: 100%;
+}
+
+.ant-modal-content {
+  width: 80%;
+  margin: 0 auto;
+}
+.ant-modal-title {
+  text-align: center;
+  color: #40A9FF !important;
+  font-size: 20px !important;
+  font-weight: bold !important;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.ant-input-affix-wrapper, .login-form-button {
+  height: 40px !important;
+}
+.login-form-forgot {
+  float: right;
+}
+.login-form-button { 
+  width: 100%;
+}
+.navbar .nav-item {
+  width: 120px;
+  height: 35px;
+  font-weight: 700;
+  outline: none;
+  font-size: .8rem;
+  cursor: pointer;
+  margin: 0px 40px;
+  text-align: center;
+}
+.avatar {
+  float: left;
+  width: 30px;
+  height: 30px;
+}
+.name__user {
+  line-height: 30px;
+}
+
+
+/* -------------------------LOADER =-----------duoi la loader */
+
+
+.pixel-spinner, .pixel-spinner * {
+  box-sizing: content-box;
+}
+
+.pixel-spinner {
+  height: 70px;
+  width: 70px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40vh;
+}
+
+.pixel-spinner .pixel-spinner-inner {
+  width: calc(70px / 7);
+  height: calc(70px / 7);
+  background-color: #6cb5df;
+  color: #6cb5df;
+  box-shadow: 15px 15px  0 0,
+              -15px -15px  0 0,
+              15px -15px  0 0,
+              -15px 15px  0 0,
+              0 15px  0 0,
+              15px 0  0 0,
+              -15px 0  0 0,
+              0 -15px 0 0;
+  animation: pixel-spinner-animation 2000ms linear infinite;
+}
+
+@keyframes pixel-spinner-animation {
+  50% {
+    box-shadow: 20px 20px 0px 0px,
+                -20px -20px 0px 0px,
+                20px -20px 0px 0px,
+                -20px 20px 0px 0px,
+                0px 10px 0px 0px,
+                10px 0px 0px 0px,
+                -10px 0px 0px 0px,
+                0px -10px 0px 0px;
+  }
+  75% {
+    box-shadow: 20px 20px 0px 0px,
+                -20px -20px 0px 0px,
+                20px -20px 0px 0px,
+                -20px 20px 0px 0px,
+                0px 10px 0px 0px,
+                10px 0px 0px 0px,
+                -10px 0px 0px 0px,
+                0px -10px 0px 0px;
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* -------------------------BODY HOME =-----------duoi la body home */
+
+
+.home__body {
+  position: absolute;
+  width: 100%;
+  top: 90%;
+  left: 0;
+  right: 0;
+  background-color: #EFF5FA;
+  z-index: 3;
+}
+.about__us__item {
+  padding: 125px 30px;
+  background-color: #fff;
+}
+.content__about-us {
+  padding: 40px 0px;
+}
+.image__hot__deals img {
+  width: 285px;
+  height: 220px;
+  margin: 0;
+}
+
+.image__hot__deals {
+  width: 285px;
+  height: 220px;
+}
+.hot__deals{
+  padding: 37px 0px;
+}

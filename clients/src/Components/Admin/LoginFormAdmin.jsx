@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { Icon, Form, Checkbox, Button, Input, Spin } from "antd";
-import "./LoginFormAdmin.css";
+import "../../assets/css/admin.css";
 import { connect } from "react-redux";
-import * as actions from "../../../Redux/Actions/Admin";
+import * as actions from "../../Redux/Actions/Admin";
 import { withRouter } from "react-router-dom";
 
 class LoginFormAdmin extends Component {
@@ -40,7 +40,7 @@ class LoginFormAdmin extends Component {
         <div className="app__login__admin">
           <Form onSubmit={this.handleOnLogin} className="login-form">
             <div className="header__form__admin">
-              <img src={require("../../../assets/img/logo-admin.svg")} alt="" />
+              <img src={require("../../assets/img/logo-admin.svg")} alt="" />
               <h3 className="title__admin">VEXERE</h3>
             </div>
             <Form.Item>
