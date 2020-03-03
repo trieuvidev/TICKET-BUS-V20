@@ -7,12 +7,12 @@ const menuRoutes = [
   {
     path: "/admin/dashboard",
     exact: true,
-    main: () => <Dashboard />
+    main: (history) => <Dashboard history={history} />
   },
   {
     path: "/admin/users",
     exact: true,
-    main: () => <ListUsers />
+    main: (history) => <ListUsers history={history} />
   }
 ];
 export default menuRoutes;

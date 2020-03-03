@@ -26,6 +26,13 @@ export const openCollapsed = () => {
   }
 };
 
+export const logoutAdminApi = () => { 
+  return dispatch => {
+    localStorage.removeItem("ACCESS_TOKEN");
+    dispatch(setInfoCurrentUser({}))
+  }
+}
+
 
 
 

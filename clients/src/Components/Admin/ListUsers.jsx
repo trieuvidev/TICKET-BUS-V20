@@ -1,13 +1,11 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment } from "react";
+import { withRouter } from "react-router-dom";
 
 class ListUsers extends Component {
+
   render() {
-    return (
-      <Fragment>
-        Component ListUsers 
-      </Fragment>
-    );
+    return <Fragment>Component ListUsers</Fragment>;
   }
 }
 
-export default ListUsers;
+export default withRouter(ListUsers);

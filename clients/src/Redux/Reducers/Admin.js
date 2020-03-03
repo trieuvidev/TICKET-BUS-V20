@@ -1,4 +1,3 @@
-import _ from "lodash";
 import * as Types from "../../constants/actionTypes";
 
 const initialState = { 

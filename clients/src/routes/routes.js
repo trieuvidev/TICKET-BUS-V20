@@ -17,7 +17,12 @@ const routes = [
     main: (history) => <LoginFormAdmin history={history} />
   },
   {
-    path: "/admin",
+    path: "/admin/dashboard",
+    exact: true,
+    main: (history) => <HomeAdmin history={history}/>
+  },
+  {
+    path: "/admin/users",
     exact: true,
     main: (history) => <HomeAdmin history={history}/>
   },

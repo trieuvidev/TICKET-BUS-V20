@@ -3,6 +3,7 @@ import { Icon, Form, Checkbox, Button, Input, Spin } from "antd";
 import "../../assets/css/admin.css";
 import { connect } from "react-redux";
 import * as actions from "../../Redux/Actions/Admin";
+import Loader from "../User/Loader";
 import { withRouter } from "react-router-dom";
 
 class LoginFormAdmin extends Component {
@@ -10,7 +11,8 @@ class LoginFormAdmin extends Component {
     super(props);
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      isShowLoader: true
     };
   }
 
@@ -20,13 +22,25 @@ class LoginFormAdmin extends Component {
     });
   };
 
+  componentDidMount = () => { 
+    this.setTimeLoader = setTimeout(() => {
+     this.setState({
+       isShowLoader: !this.state.isShowLoader
+     })
+    }, 1500);
+  }
+
+  componentWillUnmount = () => { 
+    clearTimeout(this.setTimeLoader)
+  }
+
   handleOnLogin = event => {
     event.preventDefault();
     const { email, password } = this.state;
     this.props.loginAdmin({ email, password })
     .then(res => {
       if(this.props.authenticate.isAuthenticate && this.props.authenticate.account.accountType === "admin" ) {
-        return this.props.history.push("/admin");
+        return this.props.history.push("/admin/dashboard");
       }
       return false;
     })
@@ -34,10 +48,11 @@ class LoginFormAdmin extends Component {
   };
 
   render() {
-    const { email, password } = this.state;
+    const { email, password, isShowLoader } = this.state;
     return (
       <Fragment>
-        <div className="app__login__admin">
+        {
+          isShowLoader ? <Loader /> : <div className="app__login__admin">
           <Form onSubmit={this.handleOnLogin} className="login-form">
             <div className="header__form__admin">
               <img src={require("../../assets/img/logo-admin.svg")} alt="" />
@@ -81,21 +96,26 @@ class LoginFormAdmin extends Component {
                 Login
               </Button>
             </Form.Item>
-          </Form>ơ
+          </Form>
         </div>
+        }
       </Fragment>
     );
   }
-}
+};
+
+
+
 const mapStateToProps = state => {
   return {
-    authenticate: state.authReducer 
+    authenticate: state.authReducer,
+    isLoader: state.loaderReducer 
   };
 };
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    loginAdmin: credentials => dispatch(actions.loginAdminApi(credentials))
+    loginAdmin: credentials => dispatch(actions.loginAdminApi(credentials)),
   };
 };
 

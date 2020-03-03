@@ -9,7 +9,7 @@ import "../../../assets/css/stylePage.css";
 
 import Header from "../../../Components/Admin/Header";
 import Sidebar from "../../../Components/Admin/Sidebar";
-import { BrowserRouter, Switch, Route  } from "react-router-dom";
+import { BrowserRouter, Switch, Route, withRouter  } from "react-router-dom";
 import routes from "../../../routes/menuRoutes";
 const { Content } = Layout;
 
@@ -20,7 +20,6 @@ class HomeAdmin extends Component {
       isShowloader: true
     };
   }
-
 
   showContentRoutes = routes => {
     let result = null;
@@ -40,6 +39,19 @@ class HomeAdmin extends Component {
     return result;
   };
 
+  checkRoutes = (routes) => { 
+    let result = null;
+    if(routes.length > 0) { 
+      result = routes.map((route, index) =>{ 
+        if(route.path === "/admin/users") { 
+          return this.props.history.push("/admin/dashboard")
+        }
+        return false;
+      })
+    }
+    return result;
+  }
+
   componentDidMount = () => {
     const access_token = localStorage.getItem("ACCESS_TOKEN");
     if (!access_token) {
@@ -57,7 +69,10 @@ class HomeAdmin extends Component {
         isShowloader: !this.state.isShowloader
       });
     }, 2000);
-  };
+
+// loading checkroutes
+this.checkRoutes(routes)
+};
 
   componentWillUnmount() {
     clearTimeout(this.setTime);
@@ -89,7 +104,6 @@ class HomeAdmin extends Component {
             <Switch>
               {this.showContentRoutes(routes)}
               </Switch>
-
           </Content>
             </Layout>
 
@@ -109,4 +123,4 @@ const mapDispatchToProps = (dispatch, props) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(GuardAuthenticate(HomeAdmin));
+export default withRouter(connect(null, mapDispatchToProps)(GuardAuthenticate(HomeAdmin)));
