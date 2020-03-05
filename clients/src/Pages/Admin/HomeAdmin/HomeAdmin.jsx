@@ -9,6 +9,7 @@ import "../../../assets/css/stylePage.css";
 
 import Header from "../../../Components/Admin/Header";
 import Sidebar from "../../../Components/Admin/Sidebar";
+import FooterAdmin from "../../../Components/Admin/Footer";
 import { BrowserRouter, Switch, Route, withRouter  } from "react-router-dom";
 import routes from "../../../routes/menuRoutes";
 const { Content } = Layout;
@@ -94,17 +95,13 @@ this.checkRoutes(routes)
 
               <Header />
               <Content
-            className="site-layout-background"
-            style={{
-              margin: '24px 16px',
-              padding: 24,
-              minHeight: 280,
-            }}
+            className="site-layout-background-content"
           >
             <Switch>
               {this.showContentRoutes(routes)}
               </Switch>
           </Content>
+          <FooterAdmin />
             </Layout>
 
           </Layout>

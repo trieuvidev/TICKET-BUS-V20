@@ -71,3 +71,8 @@ cursor: pointer;
   height: 100%;
   font-size: 24px;
 }
+.site-layout-background-content {
+  height: 100%;
+  margin: 24px 16px;
+  padding: 24px;
+}

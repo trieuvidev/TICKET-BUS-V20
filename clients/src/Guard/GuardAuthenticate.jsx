@@ -4,10 +4,9 @@ import * as actions from "../Redux/Actions/Admin";
 import { connect } from "react-redux";
 import jwtDecoded from "jwt-decode";
 
-
 const checkTokenLoginAdmin = () => {
   const access_token = localStorage.getItem("ACCESS_TOKEN");
-  if(!access_token) {
+  if (!access_token) {
     return false;
   }
   const decoded = jwtDecoded(access_token);
@@ -15,7 +14,6 @@ const checkTokenLoginAdmin = () => {
   if (decoded.exp < new Date().getTime() / 1000) return false;
   return true;
 };
-
 
 export default function(ComposedComponent) {
   class GuardAuthenticate extends Component {
@@ -27,10 +25,14 @@ export default function(ComposedComponent) {
     }
 
     static getDerivedStateFromProps = (nextProps, prevState) => {
-      if (nextProps.authenticate.isAuthenticate !== prevState.authenticate.isAuthenticate && !checkTokenLoginAdmin()) {
+      if (
+        nextProps.authenticate.isAuthenticate !==
+          prevState.authenticate.isAuthenticate &&
+        !checkTokenLoginAdmin()
+      ) {
         if (!nextProps.authenticate.isAuthenticate) {
           nextProps.history.push("/administrator");
-        } 
+        }
         return {
           authenticate: nextProps.authenticate
         };

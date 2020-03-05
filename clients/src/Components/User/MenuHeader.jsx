@@ -59,7 +59,7 @@ class MenuHeader extends Component {
       .catch(console.log);
   };
 
-  handelOnchage = event => {
+  handleOnchange = event => {
     this.setState({
       [event.target.name]: event.target.value
     });
