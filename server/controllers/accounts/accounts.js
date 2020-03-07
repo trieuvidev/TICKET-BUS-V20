@@ -20,7 +20,7 @@ const createAccounts = (req, res, next) => {
     return res.status(422).json({ errors: listErrorValidations });
   }
 
-  const { email, password, phone, fullName } = req.body;
+  const { email, password, phone, fullName, age, address } = req.body;
   const protocol = req.protocol;
   const host = req.get("host");
   const errorNotification = [];
@@ -40,6 +40,8 @@ const createAccounts = (req, res, next) => {
         email,
         password,
         phone,
+        age,
+        address,
         fullName,
         verifyToken: uuidv4()
       });

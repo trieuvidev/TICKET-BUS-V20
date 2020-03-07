@@ -14,7 +14,7 @@ import {
 } from "antd";
 import { connect } from "react-redux";
 import {Link} from "react-router-dom"
-import * as actions from "../../Redux/Actions/User";
+import * as actions from "../../Redux/Actions/Authenticate";
 // import Loader from "../Loader";
 const { SubMenu } = Menu;
 

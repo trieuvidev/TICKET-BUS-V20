@@ -1,6 +1,6 @@
 const { body } = require("express-validator");
 const validator = require("validator");
-const {NOTIFY} = require("../../lang/index");
+const { NOTIFY } = require("../../lang/index");
 const { email, password, phone, fullName } = require("../../utils/regex");
 
 const middlewareAccount = [
@@ -17,7 +17,9 @@ const middlewareAccount = [
     .matches(fullName),
   body("phone", NOTIFY.phone_invalid)
     .optional()
-    .matches(phone)
+    .matches(phone),
+  body("age").optional(),
+  body("address").optional()
 ];
 
 module.exports = {

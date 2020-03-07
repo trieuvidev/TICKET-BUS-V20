@@ -9,6 +9,7 @@ class User extends Component {
           rowSelection={this.props.rowSelection}
           columns={this.props.columns}
           dataSource={this.props.dataSource}
+          scroll={this.props.scroll}
         />
       </Fragment>
     );

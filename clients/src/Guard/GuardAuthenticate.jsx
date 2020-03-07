@@ -11,7 +11,7 @@ const checkTokenLoginAdmin = () => {
   }
   const decoded = jwtDecoded(access_token);
   if (decoded.accountType === "client") return false;
-  if (decoded.exp < new Date().getTime() / 1000) return false;
+  if (decoded.exp < new Date().getTime() / 1000) return localStorage.clear();;
   return true;
 };
 

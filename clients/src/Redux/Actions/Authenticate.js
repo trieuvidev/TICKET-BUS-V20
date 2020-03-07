@@ -1,6 +1,7 @@
 import * as Types from "../../constants/actionTypes";
 import api from "../../Services/Api";
 import jwtDecoded from "jwt-decode";
+import setTokenHeaders from "../../Services/SetHeaderToken";
 
 /** ----------------------------------
  * @param {*} credentials (email , password)
@@ -17,21 +18,27 @@ export const loginUserApi = credentials => {
         const email = decode.email;
         dispatch(setInfoCurrentUser(decode));
         localStorage.setItem("ACCESS_TOKEN", access_token);
+        setTokenHeaders(access_token);
 
-       return Promise.resolve({status: status, message: `Đăng nhâp nhập ${email} thành công!`})
+        return Promise.resolve({
+          status: status,
+          message: `Đăng nhâp nhập ${email} thành công!`
+        });
       })
-      .catch(() => { 
-        return Promise.reject({status: 404, message: "Email hoặc mật khẩu không đúng!"})
-      })
+      .catch(() => {
+        return Promise.reject({
+          status: 404,
+          message: "Email hoặc mật khẩu không đúng!"
+        });
+      });
   };
 };
 
-
-export const logoutUser = () => { 
-  return dispatch => { 
+export const logoutUser = () => {
+  return dispatch => {
     localStorage.removeItem("ACCESS_TOKEN");
-    dispatch(setInfoCurrentUser({}))
-  }
+    dispatch(setInfoCurrentUser({}));
+  };
 };
 
 export const setInfoCurrentUser = access_token => {
@@ -42,4 +49,3 @@ export const setInfoCurrentUser = access_token => {
     });
   };
 };
-

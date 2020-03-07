@@ -5,7 +5,7 @@ import Loader from "../../../Components/User/Loader";
 import HomeBody from "../../../Components/User/HomeBody";
 import { connect } from "react-redux";
 import jwtDecoded from "jwt-decode";
-import * as actions from "../../../Redux/Actions/User";
+import * as actions from "../../../Redux/Actions/Authenticate";
 
 class HomeUser extends Component {
   constructor(props) {

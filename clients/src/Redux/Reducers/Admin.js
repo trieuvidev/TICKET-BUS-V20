@@ -1,7 +1,8 @@
 import * as Types from "../../constants/actionTypes";
 
 const initialState = { 
-    isCollapsed: false
+    isCollapsed: false,
+    listUsers: []
 }
 
 const adminReducer = (state = initialState, action) => { 
@@ -11,6 +12,12 @@ const adminReducer = (state = initialState, action) => {
         ...state,
         isCollapsed: !state.isCollapsed
       }
+      case Types.LIST_USERS:
+        console.log(action)
+        return { 
+          ...state,
+          listUsers: action.listUsers
+        }
     default:
       break;
   }
