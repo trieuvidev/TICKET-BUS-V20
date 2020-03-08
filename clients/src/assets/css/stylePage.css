@@ -18,3 +18,7 @@
 .menu__dashboard, .menu__users{
   color: #ffffff;
 }
+.ant-breadcrumb {
+  margin-top: 20px;
+  margin-left: 15px;
+}

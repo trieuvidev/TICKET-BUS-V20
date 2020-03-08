@@ -1,12 +1,14 @@
-const jwt = require("jsonwebtoken");
+const JWT = require("jsonwebtoken");
 const { promisify } = require("util");
+const {SECRET} = require("../configs/env.authenticate");
 
-const verifyJwt = promisify(jwt.verify);
+const verifyJwt = promisify(JWT.verify);
 
 const authenticate = (req, res, next) => {
   const token = req.header("token");
-  verifyJwt(token, "TrieuViDevDepTrai@1996")
+  verifyJwt(token, SECRET) // ENV 
     .then(decoded => {
+      console.log(decoded, "decoded")
       if (decoded) req.account = decoded;
       return next();
     })
