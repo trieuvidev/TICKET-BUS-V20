@@ -8,7 +8,7 @@ export const loginAdminApi = (credentials) => {
   return dispatch => { 
    return api.post("/account/login-admin", credentials)
     .then(res => { 
-      const access_token = res.data[0].generateToken;
+      const access_token = res.data[0].accessToken;
       const decode = jwtDecoded(access_token);
       dispatch(setInfoCurrentUser(decode));
       localStorage.setItem("ACCESS_TOKEN", access_token)

@@ -12,6 +12,7 @@ const passportJWT = passport.authenticate('jwt', { session: false });
 initPassportFacebook()
 
 router.post("/account/sign-up",checkRegister, accountController.createAccounts);
+router.post("/account/refresh-token", accountController.refreshToken);
 router.get("/account/verify/:token", accountController.verifyActiveAccount);
 router.post("/account/login-user", checkLogin ,accountController.loginAccount);
 router.post("/account/login-admin", checkLogin ,accountController.loginAdmin);

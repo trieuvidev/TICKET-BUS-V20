@@ -32,6 +32,7 @@
     "fs-extra": "^8.1.0",
     "hogan.js": "^3.0.2",
     "jsonwebtoken": "^8.5.1",
+    "jwt-decode": "^2.2.0",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "mongoose": "^5.9.1",
