@@ -7,8 +7,16 @@ const { NOTIFY, NOTIFY_MAIL } = require("../../lang/index");
 const uuidv4 = require("uuid/v4");
 const sendMail = require("../../services/email/sendEmailRegisterAccount");
 const { validationResult } = require("express-validator");
-const { SECRET, EXPRIRES_IN } = require("../../configs/env.authenticate");
-const { generateToken } = require("../../helpers/jwt.helpers");
+const {
+  ACCESS_TOKEN_SECRET,
+  EXPRIRES_IN,
+  REFRESH_TOKEN_SECRET,
+  EXPRIRES_IN_REFRESH
+} = require("../../configs/env.authenticate");
+const { generateToken, verifyToken } = require("../../helpers/jwt.helpers");
+const jwtDecoded = require("jwt-decode");
+
+let tokenList = {};
 
 const createAccounts = (req, res, next) => {
   const listErrorValidations = [];
@@ -228,7 +236,7 @@ const loginAdmin = async (req, res, next) => {
         account
       ]);
     })
-    .then(res => {
+    .then(async res => {
       const [isMatch, account] = res; // isMatch:  if compare passowrd success
       errorNotification.push({
         status: 404,
@@ -242,23 +250,62 @@ const loginAdmin = async (req, res, next) => {
         accountType: account.accountType,
         fullName: account.fullName
       };
-      return generateToken(payload, SECRET, {
+      const accessToken = generateToken(payload, ACCESS_TOKEN_SECRET, {
         algorithm: "HS256",
-        expiresIn: 3600
-      }); // generateToken helpers.js
+        expiresIn: EXPRIRES_IN
+      }); // accessToken | 1h
+      const refreshToken = generateToken(payload, REFRESH_TOKEN_SECRET, {
+        algorithm: "HS256",
+        expiresIn: EXPRIRES_IN_REFRESH
+      }); // refreshToken || 1h
+      return Promise.all([accessToken, refreshToken]);
     })
-    .then(generateToken => {
+    .then(resultToken => {
+      const [accessToken,refreshToken ] = resultToken;
+      if(jwtDecoded(accessToken).exp < Date.now() / 1000) {
+      }
+      console.log(tokenList)
       successNotification.push({
         status: 200,
         message: NOTIFY.account_login_success,
-        generateToken: generateToken
+        accessToken,
+        refreshToken
       });
       return res.status(200).json(successNotification);
     })
     .catch(() => {
-      return res.status(500).json({ err: NOTIFY.account_login_fail });
+      return res.status(500).json({ err: NOTIFY.acsount_login_fail });
     });
 };
+
+
+
+const refreshToken = async (req, res, next) => {
+  const refresh_token = req.body.refreshToken;
+  if (refresh_token) {
+    return verifyToken(refresh_token, REFRESH_TOKEN_SECRET).then(decoded => {
+      if (decoded) req.account = decoded;
+      return generateToken(decoded, ACCESS_TOKEN_SECRET, {
+        algorithm: "HS256",
+        expiresIn: EXPRIRES_IN
+      })
+        .then(accessToken => {
+          console.log(accessToken);
+          return res
+            .status(200)
+            .json({
+              status: 200,
+              message: NOTIFY.account_login_success,
+              accessToken: accessToken
+            });
+        })
+        .catch(err => {
+          return res.status(500).json(err);
+        });
+    });
+  }
+};
+
 
 const findAccounts = async (req, res, next) => {
   const successNotification = [];
@@ -406,5 +453,6 @@ module.exports = {
   loginAccount,
   updateAccount,
   deleteAccount,
-  verifyActiveAccount
+  verifyActiveAccount,
+  refreshToken
 };

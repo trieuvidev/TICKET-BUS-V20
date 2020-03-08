@@ -1,20 +1,19 @@
-const JWT = require("jsonwebtoken");
-const { promisify } = require("util");
-const {SECRET} = require("../configs/env.authenticate");
-
-const verifyJwt = promisify(JWT.verify);
+const {ACCESS_TOKEN_SECRET} = require("../configs/env.authenticate");
+const {verifyToken} = require("../helpers/jwt.helpers");
 
 const authenticate = (req, res, next) => {
   const token = req.header("token");
-  verifyJwt(token, SECRET) // ENV 
-    .then(decoded => {
-      console.log(decoded, "decoded")
-      if (decoded) req.account = decoded;
-      return next();
-    })
-    .catch(() => {
-      return res.status(401).json({status: 401, message: "Authenticate is not found!"})
-    });
+  if(!token) { 
+    return Promise.reject({status: 403, message: "No token provided!"})
+  };
+  return verifyToken(token, ACCESS_TOKEN_SECRET)
+  .then(decoded => { 
+    if(decoded) req.account = decoded;
+    return next();
+  })
+  .catch(() => { 
+    return res.status(401).json({status: 401, message: "Authenticate is not found!"})
+  })
 };
 
 // accountType = ["admin", "client"];

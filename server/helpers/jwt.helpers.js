@@ -1,6 +1,5 @@
 const JWT = require("jsonwebtoken");
 const { promisify } = require("util");
-const {SECRET, EXPRIRES_IN} = require("../configs/env.authenticate");
 
 /**
  *
@@ -9,8 +8,9 @@ const {SECRET, EXPRIRES_IN} = require("../configs/env.authenticate");
  * @param {line Token} expiIn
  */
 const jwtSign = promisify(JWT.sign);
+const jwtVerify = promisify(JWT.verify);
 
-const generateToken = (user, secretKey, tokenLine) => {
+const generateToken = (user, secretSignature , tokenLine) => {
   //
   const payloadUser = {
     _id: user._id,
@@ -19,7 +19,7 @@ const generateToken = (user, secretKey, tokenLine) => {
     fullName: user.fullName
   };
   
- return jwtSign(payloadUser, secretKey, tokenLine)
+ return jwtSign(payloadUser, secretSignature , tokenLine)
  .then(token => { 
    return Promise.resolve(token);
  })
@@ -28,7 +28,15 @@ const generateToken = (user, secretKey, tokenLine) => {
  })
 };
 
-const verifyToken = (token, secretKey) => {};
+const verifyToken = (token, secretKey) => {
+  return jwtVerify(token, secretKey, (error, decoded) => { 
+    if(error) { 
+      Promise.reject({error: "error"});
+    }
+    console.log(decoded, "decoded")
+    return Promise.resolve(decoded)
+  })
+};
 
 module.exports = {
   generateToken,
