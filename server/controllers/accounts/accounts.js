@@ -6,8 +6,9 @@ const jwt = require("jsonwebtoken");
 const { NOTIFY, NOTIFY_MAIL } = require("../../lang/index");
 const uuidv4 = require("uuid/v4");
 const sendMail = require("../../services/email/sendEmailRegisterAccount");
-const { validationResult } = require('express-validator');
-
+const { validationResult } = require("express-validator");
+const { SECRET, EXPRIRES_IN } = require("../../configs/env.authenticate");
+const { generateToken } = require("../../helpers/jwt.helpers");
 
 const createAccounts = (req, res, next) => {
   const listErrorValidations = [];
@@ -31,11 +32,13 @@ const createAccounts = (req, res, next) => {
         errorNotification.push({ status: 201, message: "Account is exist!" });
         return Promise.reject(errorNotification);
       }
-      if (!validator.equals(req.body.password, req.body.confirmPassword)) 
-    {
-      errorNotification.push({status: 403, password: NOTIFY.password_match });
-      return Promise.reject(errorNotification);
-    }
+      if (!validator.equals(req.body.password, req.body.confirmPassword)) {
+        errorNotification.push({
+          status: 403,
+          password: NOTIFY.password_match
+        });
+        return Promise.reject(errorNotification);
+      }
       const newAccount = new Account({
         email,
         password,
@@ -47,7 +50,11 @@ const createAccounts = (req, res, next) => {
       });
       newAccount.save().then(async account => {
         const linkVerify = `${protocol}://${host}/api/account/verify/${account.verifyToken}`;
-        await sendMail(email, NOTIFY_MAIL.subject(email), NOTIFY_MAIL.tempale(linkVerify));
+        await sendMail(
+          email,
+          NOTIFY_MAIL.subject(email),
+          NOTIFY_MAIL.tempale(linkVerify)
+        );
         successNotification.push({
           status: 200,
           message: "Register account successfuly! Please check email register",
@@ -72,41 +79,48 @@ const verifyActiveAccount = (req, res, next) => {
   Account.findOne({ verifyToken: token })
     .then(account => {
       if (!account) {
-        errorNotification.push({ status: 404, message: NOTIFY.token_delete_verify })
-        return Promise.reject(errorNotification)
+        errorNotification.push({
+          status: 404,
+          message: NOTIFY.token_delete_verify
+        });
+        return Promise.reject(errorNotification);
       }
       // active true
       account.isActive = true;
-      account.save()
-        .then(user => {
-          successNotification.push({ status: 200, message: `Active email ${account.email} successfuly! Have nice a day ^^`, account: user })
-          return res.status(200).json(successNotification);
-        })
+      account.save().then(user => {
+        successNotification.push({
+          status: 200,
+          message: `Active email ${account.email} successfuly! Have nice a day ^^`,
+          account: user
+        });
+        return res.status(200).json(successNotification);
+      });
     })
     .catch(err => {
       if (err.status) {
         return res.status(res.status).json(errorNotification);
       }
       return res.status(500).json(err);
-    })
-}
+    });
+};
 
 //** Login Account */
 const comparePassword = promisify(bcrypt.compare);
 const jwtSign = promisify(jwt.sign);
 
-const loginAccount = async(req, res, next) => {
+const loginAccount = async (req, res, next) => {
   const listErrorValidations = [];
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    if(!errors.email) listErrorValidations.push({email: NOTIFY.email_require});
-    if(!errors.password) listErrorValidations.push({password: NOTIFY.password_require})
+    if (!errors.email)
+      listErrorValidations.push({ email: NOTIFY.email_require });
+    if (!errors.password)
+      listErrorValidations.push({ password: NOTIFY.password_require });
     errors
       .array()
       .map(err => listErrorValidations.push({ [err.param]: err.msg }));
     return res.status(422).json({ errors: listErrorValidations });
   }
-
 
   const errorNotification = [];
   const successNotification = [];
@@ -126,9 +140,9 @@ const loginAccount = async(req, res, next) => {
           message: "Account is not active! Please check email register!"
         });
         return Promise.reject(errorNotification);
-      } else { 
-        if(account.accountType === "admin") { 
-          return Promise.reject("dang nhap khong hop le")
+      } else {
+        if (account.accountType === "admin") {
+          return Promise.reject("dang nhap khong hop le");
         }
       }
       return Promise.all([
@@ -150,7 +164,7 @@ const loginAccount = async(req, res, next) => {
         accountId: account._id,
         fullName: account.fullName
       };
-      return jwtSign(payload, "TrieuViDevDepTrai@1996", { expiresIn: 3600 });
+      return jwtSign(payload, SECRET, { expiresIn: EXPRIRES_IN });
     })
     .then(token => {
       successNotification.push({
@@ -166,20 +180,26 @@ const loginAccount = async(req, res, next) => {
     });
 };
 
-
-const loginAdmin = async(req, res, next) => {
+const loginAdmin = async (req, res, next) => {
+  /**
+   * CHECK VALIDATE
+   */
   const listErrorValidations = [];
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    if(!errors.email) listErrorValidations.push({email: NOTIFY.email_require});
-    if(!errors.password) listErrorValidations.push({password: NOTIFY.password_require})
+    if (!errors.email)
+      listErrorValidations.push({ email: NOTIFY.email_require });
+    if (!errors.password)
+      listErrorValidations.push({ password: NOTIFY.password_require });
     errors
       .array()
       .map(err => listErrorValidations.push({ [err.param]: err.msg }));
     return res.status(422).json({ errors: listErrorValidations });
   }
 
-
+  /**
+   * CHECK LOGIN
+   */
   const errorNotification = [];
   const successNotification = [];
   const { email, password } = req.body;
@@ -198,9 +218,9 @@ const loginAdmin = async(req, res, next) => {
           message: "Account is not active! Please check email register!"
         });
         return Promise.reject(errorNotification);
-      } else { 
-        if(account.accountType === "client") { 
-          return Promise.reject("Login faild")
+      } else {
+        if (account.accountType === "client") {
+          return Promise.reject("Login faild");
         }
       }
       return Promise.all([
@@ -217,24 +237,26 @@ const loginAdmin = async(req, res, next) => {
       if (!isMatch) return Promise.reject(errorNotification);
       // create payload
       const payload = {
+        _id: account._id,
         email: account.email,
         accountType: account.accountType,
-        accountId: account._id,
         fullName: account.fullName
       };
-      return jwtSign(payload, "TrieuViDevDepTrai@1996", { expiresIn: 3600 });
+      return generateToken(payload, SECRET, {
+        algorithm: "HS256",
+        expiresIn: 3600
+      }); // generateToken helpers.js
     })
-    .then(token => {
+    .then(generateToken => {
       successNotification.push({
         status: 200,
         message: NOTIFY.account_login_success,
-        token: token
+        generateToken: generateToken
       });
       return res.status(200).json(successNotification);
     })
-    .catch(err => {
-      if (err.status) return res.status(err.status).json(errorNotification);
-      return res.status(500).json(err);
+    .catch(() => {
+      return res.status(500).json({ err: NOTIFY.account_login_fail });
     });
 };
 
@@ -281,70 +303,70 @@ const findAccountById = async (req, res, next) => {
     });
 };
 
-const updateAccount =async (req, res, next) => {
+const updateAccount = async (req, res, next) => {
   const listErrorValidations = [];
   const errors = validationResult(req);
-  let user = await Account.findById(req.params.id)
+  let user = await Account.findById(req.params.id);
   if (!errors.isEmpty()) {
-    if(!req.body.email !== user.email) listErrorValidations.push({email: NOTIFY.email_not_update })
+    if (!req.body.email !== user.email)
+      listErrorValidations.push({ email: NOTIFY.email_not_update });
 
     errors
       .array()
       .map(err => listErrorValidations.push({ [err.param]: err.msg }));
-    return res.status(422).json({ errors: listErrorValidations});
+    return res.status(422).json({ errors: listErrorValidations });
   }
 
-    const errorNotification = [];
-    const successNotification = [];
-    const { id } = req.params;
-    const { password, fullName, phone } = req.body;
-  
-    Account.findById(id)
-      .then(account => {
-        if (!account) {
-          errorNotification.push({
-            status: 404,
-            message: NOTIFY.account_not_found
-          });
-          return Promise.reject(errorNotification);
-        }
-        return Promise.all([
-          comparePassword(password, account.password),
-          account,
-          password,
-          fullName,
-          phone
-        ]);
-      })
-      .then(result => {
-        const [isMatchPassword, account, password, fullName, phone] = result;
-        if (isMatchPassword) {
-          errorNotification.push({
-            status: 422,
-            message: NOTIFY.nofify_update_password
-          });
-          return Promise.reject(errorNotification);
-        } else {
-          // =>  update
-          account.fullName = fullName;
-          account.phone = phone;
-          account.password = password;
-          account.createdAt = Date.now();
-          account.save().then(account => {
-            successNotification.push({
-              status: 200,
-              message: NOTIFY.notify_update_successfuly,
-              account: account
-            });
-            return res.status(200).json(successNotification);
-          });
-        }
-      })
-      .catch(err => {
-        if (err.status) return res.status(err.status).json(errorNotification);
-        return res.status(500).json(err);
-      });
+  const errorNotification = [];
+  const successNotification = [];
+  const { id } = req.params;
+  const { password, fullName, phone } = req.body;
 
+  Account.findById(id)
+    .then(account => {
+      if (!account) {
+        errorNotification.push({
+          status: 404,
+          message: NOTIFY.account_not_found
+        });
+        return Promise.reject(errorNotification);
+      }
+      return Promise.all([
+        comparePassword(password, account.password),
+        account,
+        password,
+        fullName,
+        phone
+      ]);
+    })
+    .then(result => {
+      const [isMatchPassword, account, password, fullName, phone] = result;
+      if (isMatchPassword) {
+        errorNotification.push({
+          status: 422,
+          message: NOTIFY.nofify_update_password
+        });
+        return Promise.reject(errorNotification);
+      } else {
+        // =>  update
+        account.fullName = fullName;
+        account.phone = phone;
+        account.password = password;
+        account.createdAt = Date.now();
+        account.save().then(account => {
+          successNotification.push({
+            status: 200,
+            message: NOTIFY.notify_update_successfuly,
+            account: account
+          });
+          return res.status(200).json(successNotification);
+        });
+      }
+    })
+    .catch(err => {
+      if (err.status) return res.status(err.status).json(errorNotification);
+      return res.status(500).json(err);
+    });
 };
 
 const deleteAccount = (req, res, next) => {
@@ -371,7 +393,6 @@ const deleteAccount = (req, res, next) => {
     .catch(err => {
       if (err.status) return res.status(err.status).json(errorNotification);
       else if (err.isEmpty()) {
-
       }
       return res.status(500).json(err);
     });

@@ -4,7 +4,7 @@ import jwtDecoded from "jwt-decode";
 import { connect } from "react-redux";
 import * as actions from "../../../Redux/Actions/Authenticate";
 import Loader from "../../../Components/User/Loader";
-import { Layout } from "antd";
+import { Layout, Breadcrumb } from "antd";
 import "../../../assets/css/stylePage.css";
 
 import Header from "../../../Components/Admin/Header";
@@ -62,14 +62,14 @@ class HomeAdmin extends Component {
     if (
       decoded.exp > new Date().getTime() / 1000 &&
       decoded.accountType === "admin"
-      ) {
-        this.props.setCurrentAccount(decoded);
-      }
-      this.setTime = setTimeout(() => {
-        this.setState({
-          isShowloader: !this.state.isShowloader
-        });
-      }, 2000);
+    ) {
+      this.props.setCurrentAccount(decoded);
+    }
+    this.setTime = setTimeout(() => {
+      this.setState({
+        isShowloader: !this.state.isShowloader
+      });
+    }, 2000);
     // setTokenHeaders
     setTokenHeaders(access_token);
     // loading checkroutes
@@ -78,7 +78,7 @@ class HomeAdmin extends Component {
 
   componentWillUnmount() {
     clearTimeout(this.setTime);
-  };
+  }
 
   render() {
     return (
@@ -92,8 +92,14 @@ class HomeAdmin extends Component {
 
               <Layout className="site-layout">
                 <Header />
+                <Layout className="layout-breadcrumd">
+                <Breadcrumb>
+                  <Breadcrumb.Item>Home</Breadcrumb.Item>
+                  <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
+                </Breadcrumb>
+                </Layout>
                 <Content className="site-layout-background-content">
-                    <Switch>{this.showContentRoutes(routes)}</Switch>
+                  <Switch>{this.showContentRoutes(routes)}</Switch>
                 </Content>
                 <FooterAdmin />
               </Layout>
