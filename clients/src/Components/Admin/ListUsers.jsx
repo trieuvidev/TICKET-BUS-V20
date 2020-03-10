@@ -1,12 +1,15 @@
 import React, { Component, Fragment } from "react";
 import { withRouter } from "react-router";
-import { Tag } from "antd";
+import { Input, Button } from "antd";
 import User from "./User";
 import { connect } from "react-redux";
-import { Skeleton } from 'antd';
-// import Loader from "../../Components/User/Loader";
+import { Skeleton } from "antd";
 import GuardAuthenticate from "../../Guard/GuardAuthenticate";
 import * as actions from "../../Redux/Actions/Admin";
+import {
+  PlusOutlined
+} from "@ant-design/icons";
+const { Search } = Input;
 
 const columns = [
   {
@@ -47,7 +50,7 @@ class ListUsers extends Component {
         isShowLoader: !this.state.isShowLoader
       });
     }, 1000);
-    this.props.getListUser(); 
+    this.props.getListUser();
   };
 
   componentWillUnmount() {
@@ -68,25 +71,47 @@ class ListUsers extends Component {
       onChange: this.onSelectChange
     };
 
-    const hasSelected = selectedRowKeys.length > 0;
+    // const hasSelected = selectedRowKeys.length > 0;
 
     return (
       <Fragment>
-        {/* <div style={{ marginBottom: 16 }}>
-          <span style={{ marginLeft: 8 }}>
-            {hasSelected ? `Selected ${selectedRowKeys.length} items` : ""}
-          </span>
-        </div> */}
         {this.state.isShowLoader ? (
           <Skeleton paragraph={{ rows: 10 }} />
         ) : (
-          <User
-            rowSelection={rowSelection}
-            columns={columns}
-            dataSource={listUsers}
-            scroll={{ x: 1300 }}
-          />
+          <div>
+            <div
+              style={{ paddingBottom: 20 }}
+              className="warpper__input__users"
+            >
+              <Search
+                style={{ width: 180, maxHeight: 30, marginRight: 10 }}
+                className="input__user-search"
+                placeholder="Search User"
+                onSearch={value => console.log(value)}
+              />
+              <Button type="primary">Search</Button>
+              <Button style={{float: 'right'}} type="primary">
+              <PlusOutlined />
+                Create User
+                </Button>
+            </div>
+            <User
+              rowSelection={rowSelection}
+              columns={columns}
+              dataSource={listUsers}
+              scroll={{ x: 1300 }}
+            />
+          </div>
         )}
+        {/* {this.state.isShowLoader ?
+          <Skeleton paragraph={{ rows: 10 }} /> :
+          <User
+          rowSelection={rowSelection}
+          columns={columns}
+          dataSource={listUsers}
+          scroll={{ x: 1300 }}
+        />
+        } */}
       </Fragment>
     );
   }

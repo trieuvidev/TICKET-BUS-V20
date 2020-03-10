@@ -4,7 +4,7 @@ import jwtDecoded from "jwt-decode";
 import { connect } from "react-redux";
 import * as actions from "../../../Redux/Actions/Authenticate";
 import Loader from "../../../Components/User/Loader";
-import { Layout, Breadcrumb } from "antd";
+import { Layout, Breadcrumb ,Input} from "antd";
 import "../../../assets/css/stylePage.css";
 
 import Header from "../../../Components/Admin/Header";
@@ -14,6 +14,7 @@ import { BrowserRouter, Switch, Route, withRouter } from "react-router-dom";
 import routes from "../../../routes/menuRoutes";
 import setTokenHeaders from "../../../Services/SetHeaderToken";
 const { Content } = Layout;
+const { Search } = Input;
 
 class HomeAdmin extends Component {
   constructor(props) {

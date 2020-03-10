@@ -11,7 +11,9 @@ const checkTokenLoginAdmin = () => {
   }
   const decoded = jwtDecoded(access_token);
   if (decoded.accountType === "client") return false;
-  if (decoded.exp < new Date().getTime() / 1000) return localStorage.clear();;
+  if (decoded.exp < new Date().getTime() / 1000) {
+    return localStorage.clear();
+  }
   return true;
 };
 
@@ -55,5 +57,7 @@ export default function(ComposedComponent) {
     };
   };
 
-  return withRouter(connect(mapStateToProps, null)(GuardAuthenticate));
+  return withRouter(
+    connect(mapStateToProps, null)(GuardAuthenticate)
+  );
 }

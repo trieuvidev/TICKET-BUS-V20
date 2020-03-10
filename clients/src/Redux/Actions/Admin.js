@@ -4,20 +4,37 @@ import jwtDecoded from "jwt-decode";
 import {setInfoCurrentUser} from "./Authenticate";
 import setTokenHeaders from "../../Services/SetHeaderToken";
 
+
 export const loginAdminApi = (credentials) => { 
   return dispatch => { 
    return api.post("/account/login-admin", credentials)
     .then(res => { 
       const access_token = res.data[0].accessToken;
+      const refesh_token = res.data[0].refreshToken;
       const decode = jwtDecoded(access_token);
       dispatch(setInfoCurrentUser(decode));
       localStorage.setItem("ACCESS_TOKEN", access_token)
+      localStorage.setItem("REFRESH_TOKEN", refesh_token)
       setTokenHeaders(access_token);
-       return Promise.resolve({status: 200, message: `Đăng nhâp nhập thành công!`})
+     return Promise.resolve({status: 200, message: `Đăng nhâp nhập thành công!`})
     })
     .catch(console.log)
   }
 };
+
+
+// export const refreshTokenApi = (dispatch) => { 
+//   let refesh_token = localStorage.getItem("REFRESH_TOKEN");
+//   return api.post("account/refresh-token", refesh_token)
+//   .then(res => { 
+//     const access_token = res.data[0].accessToken;
+//     const decode = jwtDecoded(access_token);
+//       dispatch(setInfoCurrentUser(decode));
+//       localStorage.setItem("ACCESS_TOKEN", access_token)
+//       setTokenHeaders(access_token);
+//   })
+//   .catch(console.log)
+// };
 
 
 export const listUsersApi = () => {

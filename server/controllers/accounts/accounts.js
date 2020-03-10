@@ -262,9 +262,6 @@ const loginAdmin = async (req, res, next) => {
     })
     .then(resultToken => {
       const [accessToken,refreshToken ] = resultToken;
-      if(jwtDecoded(accessToken).exp < Date.now() / 1000) {
-      }
-      console.log(tokenList)
       successNotification.push({
         status: 200,
         message: NOTIFY.account_login_success,

@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const moment = require("moment");
 
+let dateTime = Date.now();
+
 const AccountSchema = new mongoose.Schema({
   email: { type: String, required: false},
   password: { type: String, required: true },
@@ -13,7 +15,7 @@ const AccountSchema = new mongoose.Schema({
   avatar: { type: String },
   isActive: { type: Boolean, default: false },
   verifyToken: String,
-  createdAt: { type: String, default: moment().format('LLLL') }
+  createdAt: { type: String, default: moment(dateTime).format("YYYY-MM-DD HH:mm:ss")}
 });
 
 AccountSchema.pre("save", async function (next) {
