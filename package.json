@@ -33,7 +33,7 @@
     "hogan.js": "^3.0.2",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^2.2.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "moment": "^2.24.0",
     "mongoose": "^5.9.1",
     "nodemailer": "^6.4.2",
